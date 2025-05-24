@@ -39,7 +39,7 @@ jobs:
         run: |
           singularity build image_to_grayscale.sif singularity.def
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: singularity-image
           path: image_to_grayscale.sif
