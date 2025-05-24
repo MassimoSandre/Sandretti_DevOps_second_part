@@ -7,7 +7,7 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
+  build_and_test:
 
     runs-on: ubuntu-latest
 
@@ -29,3 +29,17 @@ jobs:
       run: |
           cd build
           ctest --output-on-failure
+  build_container:
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Singularity container image
+        run: |
+          singularity build image_to_grayscale.sif singularity.def
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: singularity-image
+          path: image_to_grayscale.sif

@@ -1,0 +1,22 @@
+Bootstrap: library
+From: docker://ubuntu:20.04
+
+%labels
+  Author:  Massimo Sandretti
+  Version: v1.0.0
+
+%post
+  apt-get update && apt-get install -y \
+    build-essential cmake libgtest-dev \
+  && rm -rf /var/lib/apt/lists/*
+
+  mkdir -p /workspace/build
+  cd /workspace/build
+  cmake ..
+  make
+
+%environment
+  export PATH=/workspace/build:$PATH
+
+%runscript
+  exec image_to_grayscale "$@"
