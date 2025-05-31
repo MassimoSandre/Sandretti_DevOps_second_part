@@ -42,7 +42,7 @@ jobs:
 
       - name: Build Singularity container image
         run: |
-          sudo singularity build --fakeroot image_to_grayscale.sif singularity.def
+          sudo singularity build image_to_grayscale.sif singularity.def
 
       - uses: actions/upload-artifact@v4
         with:
