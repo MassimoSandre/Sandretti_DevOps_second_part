@@ -1,0 +1,94 @@
+[2025-05-31 12:20:18] Input directory:  /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images
+[2025-05-31 12:20:18] Output directory (Lightness): /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/lightness
+[2025-05-31 12:20:18] Output directory (Average): /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/average
+[2025-05-31 12:20:18] Output directory (Luminosity): /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/luminosity
+[2025-05-31 12:20:18] Output directory (RootMeanSquare): /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/rootmeansquare
+[2025-05-31 12:20:18] Output directory (RedChannel): /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/redchannel
+[2025-05-31 12:20:18] Output directory (GreenChannel): /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/greenchannel
+[2025-05-31 12:20:18] Output directory (BlueChannel): /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/bluechannel
+[2025-05-31 12:20:18] Container:        /g100/home/userexternal/msandret/jobs/images_to_grayscale/image_to_grayscale.sif
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_2.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/lightness/random_image_2.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_4.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/lightness/random_image_4.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_5.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/lightness/random_image_5.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_7.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/lightness/random_image_7.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_3.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/lightness/random_image_3.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_9.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/lightness/random_image_9.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/image.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/lightness/image.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_1.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/lightness/random_image_1.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_11.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/lightness/random_image_11.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_10.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/lightness/random_image_10.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_6.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/lightness/random_image_6.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_8.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/lightness/random_image_8.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_2.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/average/random_image_2.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_4.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/average/random_image_4.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_5.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/average/random_image_5.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_7.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/average/random_image_7.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_3.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/average/random_image_3.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_9.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/average/random_image_9.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/image.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/average/image.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_1.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/average/random_image_1.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_11.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/average/random_image_11.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_10.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/average/random_image_10.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_6.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/average/random_image_6.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_8.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/average/random_image_8.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_2.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/luminosity/random_image_2.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_4.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/luminosity/random_image_4.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_5.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/luminosity/random_image_5.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_7.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/luminosity/random_image_7.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_3.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/luminosity/random_image_3.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_9.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/luminosity/random_image_9.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/image.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/luminosity/image.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_1.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/luminosity/random_image_1.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_11.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/luminosity/random_image_11.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_10.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/luminosity/random_image_10.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_6.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/luminosity/random_image_6.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_8.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/luminosity/random_image_8.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_2.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/rootmeansquare/random_image_2.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_4.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/rootmeansquare/random_image_4.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_5.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/rootmeansquare/random_image_5.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_7.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/rootmeansquare/random_image_7.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_3.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/rootmeansquare/random_image_3.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_9.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/rootmeansquare/random_image_9.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/image.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/rootmeansquare/image.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_1.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/rootmeansquare/random_image_1.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_11.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/rootmeansquare/random_image_11.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_10.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/rootmeansquare/random_image_10.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_6.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/rootmeansquare/random_image_6.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_8.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/rootmeansquare/random_image_8.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_2.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/redchannel/random_image_2.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_4.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/redchannel/random_image_4.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_5.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/redchannel/random_image_5.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_7.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/redchannel/random_image_7.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_3.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/redchannel/random_image_3.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_9.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/redchannel/random_image_9.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/image.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/redchannel/image.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_1.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/redchannel/random_image_1.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_11.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/redchannel/random_image_11.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_10.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/redchannel/random_image_10.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_6.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/redchannel/random_image_6.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_8.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/redchannel/random_image_8.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_2.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/greenchannel/random_image_2.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_4.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/greenchannel/random_image_4.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_5.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/greenchannel/random_image_5.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_7.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/greenchannel/random_image_7.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_3.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/greenchannel/random_image_3.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_9.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/greenchannel/random_image_9.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/image.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/greenchannel/image.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_1.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/greenchannel/random_image_1.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_11.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/greenchannel/random_image_11.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_10.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/greenchannel/random_image_10.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_6.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/greenchannel/random_image_6.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_8.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/greenchannel/random_image_8.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_2.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/bluechannel/random_image_2.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_4.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/bluechannel/random_image_4.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_5.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/bluechannel/random_image_5.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_7.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/bluechannel/random_image_7.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_3.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/bluechannel/random_image_3.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_9.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/bluechannel/random_image_9.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/image.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/bluechannel/image.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_1.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/bluechannel/random_image_1.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_11.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/bluechannel/random_image_11.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_10.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/bluechannel/random_image_10.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_6.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/bluechannel/random_image_6.pgm
+Converted: /g100/home/userexternal/msandret/jobs/images_to_grayscale/input_images/random_image_8.ppm -> /g100/home/userexternal/msandret/jobs/images_to_grayscale/output_images/bluechannel/random_image_8.pgm
+[2025-05-31 12:20:23] Singularity exited with code: 0

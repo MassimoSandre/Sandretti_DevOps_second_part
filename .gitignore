@@ -5,3 +5,5 @@
 /output_ppm
 convert_grayscale
 *.sif
+/in
+/out
