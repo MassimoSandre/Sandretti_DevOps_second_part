@@ -1,5 +1,5 @@
 Bootstrap: library
-From: docker://ubuntu:20.04
+From: ubuntu:20.04
 
 %labels
   Author:  Massimo Sandretti
