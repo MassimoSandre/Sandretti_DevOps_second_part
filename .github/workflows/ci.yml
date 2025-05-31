@@ -38,6 +38,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y singularity-container
+          echo "root:100000:65536" | sudo tee -a /etc/subuid /etc/subgid
 
       - name: Build Singularity container image
         run: |
