@@ -1,6 +1,9 @@
 Bootstrap: library
 From: ubuntu:20.04
 
+%files
+  . /workspace
+
 %labels
   Author:  Massimo Sandretti
   Version: v1.0.0
