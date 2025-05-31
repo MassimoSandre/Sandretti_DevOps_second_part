@@ -6,6 +6,19 @@ From: ubuntu:20.04
   Version: v1.0.0
 
 %post
+  export DEBIAN_FRONTEND=noninteractive
+  export TZ=Europe/Rome
+
+  echo "tzdata tzdata/Areas select Europe"              > /tmp/tzdata.preseed
+  echo "tzdata tzdata/Zones/Europe select Rome"        >> /tmp/tzdata.preseed
+  debconf-set-selections /tmp/tzdata.preseed
+
+  apt-get update
+  apt-get install -y tzdata
+
+  ln -fs /usr/share/zoneinfo/Europe/Rome /etc/localtime
+  dpkg-reconfigure --frontend noninteractive tzdata
+
   apt-get update && apt-get install -y \
     build-essential cmake libgtest-dev \
   && rm -rf /var/lib/apt/lists/*
