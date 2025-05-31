@@ -35,7 +35,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install Singularity
+        env:
+          DEBIAN_FRONTEND: noninteractive
         run: |
+          echo "tzdata tzdata/Areas select Europe"         | sudo debconf-set-selections
+          echo "tzdata tzdata/Zones/Europe select Rome"   | sudo debconf-set-selections
+
           sudo apt-get update
           sudo apt-get install -y singularity-container
           echo "root:100000:65536" | sudo tee -a /etc/subuid /etc/subgid
