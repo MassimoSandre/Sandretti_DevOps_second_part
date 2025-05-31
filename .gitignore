@@ -4,3 +4,4 @@
 /output_images
 /output_ppm
 convert_grayscale
+*.sif
