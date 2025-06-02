@@ -113,3 +113,8 @@ jobs:
           EOF
 
           ssh -o StrictHostKeyChecking=no msandret@login.g100.cineca.it
+
+      - name: sbatch job
+        run: |
+          scp -i ~/.ssh/my_key -o StrictHostKeyChecking=no galileo100/job.sh msandret@login.g100.cineca.it:~/
+          ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "sbatch ~/job.sh"
