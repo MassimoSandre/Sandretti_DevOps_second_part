@@ -103,7 +103,7 @@ jobs:
           scp -i ~/.ssh/my_key -o StrictHostKeyChecking=no -r galileo100/input_images msandret@login.g100.cineca.it:~/jobs/img_to_grayscale_automatic/
           scp -i ~/.ssh/my_key -o StrictHostKeyChecking=no image_to_grayscale.sif msandret@login.g100.cineca.it:~/jobs/img_to_grayscale_automatic/
           
-          jobid=$(ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "cd ~/$REMOTE_DIR && sbatch job.sh" | awk '{print $4}')
+          jobid=$(ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "cd ~/jobs/img_to_grayscale_automatic/ && sbatch job.sh" | awk '{print $4}')
           echo "Job ID: $jobid"
 
           while ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "squeue -j $jobid" | grep -q $jobid; do
@@ -114,6 +114,6 @@ jobs:
           echo "Job $jobid completed."
 
           echo "Job output:"
-          ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no $REMOTE "cat ~/$REMOTE_DIR/job_${jobid}.out"
+          ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "cat ~/jobs/img_to_grayscale_automatic/job_${jobid}.out"
           echo "Job error:"
-          ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no $REMOTE "cat ~/$REMOTE_DIR/job_${jobid}.err"
+          ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "cat ~/jobs/img_to_grayscale_automatic/job_${jobid}.err"
