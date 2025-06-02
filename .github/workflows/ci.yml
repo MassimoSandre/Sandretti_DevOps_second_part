@@ -94,23 +94,17 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_PASSPHRASE: ${{ secrets.SSH_PASSPHRASE }}
         run: |
-
           mkdir -p ~/.ssh
-          
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" | base64 -d > ~/.ssh/my_key
-          echo "${{ secrets.SSH_PUBLIC_KEY }}"  | base64 -d > ~/.ssh/my_key.pub
-          echo "${{ secrets.SSH_CERT }}"        | base64 -d > ~/.ssh/my_key.crt
-          # mkdir -p ~/.ssh
-          # echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/my_key
+          echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/my_key
           chmod 600 ~/.ssh/my_key
 
           eval "$(ssh-agent -s)"
 
-          expect -c "
-          spawn ssh-add ~/.ssh/my_key
-          expect \"Enter passphrase for ~/.ssh/my_key:\"
-          send \"$SSH_PASSPHRASE\r\"
+          expect <<EOF
+          spawn ssh-add "$HOME/.ssh/my_key"
+          expect "Enter passphrase for $HOME/.ssh/my_key:"
+          send "$SSH_PASSPHRASE\r"
           expect eof
-          "
+          EOF
 
           ssh -o StrictHostKeyChecking=no msandret@login.g100.cineca.it
