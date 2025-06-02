@@ -99,20 +99,15 @@ jobs:
       - name: Install expect
         run: sudo apt-get update && sudo apt-get install -y expect
 
-      - name: Start ssh-agent and add keys
-        run: |
-          eval "$(ssh-agent -s)"
-      
-      - name: Add SSH key with passphrase using expect
+      - name: SSH connect with passphrase
         env:
           SSH_PASSPHRASE: ${{ secrets.SSH_PASSPHRASE }}
         run: |
+          eval "$(ssh-agent -s)"
           expect -c "
           spawn ssh-add ~/.ssh/my_key
           expect \"Enter passphrase for ~/.ssh/my_key:\"
           send \"$SSH_PASSPHRASE\r\"
           expect eof
           "
-
-      - name: SSH connect
-        run: ssh -o StrictHostKeyChecking=no msandret@login.g100.cineca.it
+          ssh -o StrictHostKeyChecking=no msandret@login.g100.cineca.it
