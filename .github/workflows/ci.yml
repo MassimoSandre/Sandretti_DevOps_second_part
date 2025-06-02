@@ -59,6 +59,7 @@ jobs:
           path: image_to_grayscale.sif
   
   send_to_cluster:
+    needs: build_container
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
