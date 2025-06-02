@@ -95,7 +95,6 @@ jobs:
           expect eof
           EOF
 
-          ssh-keygen -f '/home/runner/.ssh/known_hosts' -R 'login.g100.cineca.it'
           ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "
             rm -rf ~/jobs/img_to_grayscale_automatic && \
             mkdir -p ~/jobs/img_to_grayscale_automatic
@@ -126,3 +125,10 @@ jobs:
           echo "Job error:"
           ssh-keygen -f '/home/runner/.ssh/known_hosts' -R 'login.g100.cineca.it'
           ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "cat ~/jobs/img_to_grayscale_automatic/job_${jobid}.err"
+
+          scp -i ~/.ssh/my_key -o StrictHostKeyChecking=no -r msandret@login.g100.cineca.it:~/jobs/img_to_grayscale_automatic/output_images ./output_images
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: output-images
+          path: ./output_images
