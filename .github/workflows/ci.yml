@@ -84,7 +84,6 @@ jobs:
       #     ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it
       #     echo "${{ secrets.SSH_PASSPHRASE }}"
 
-    steps:
       - uses: actions/checkout@v3
 
       - name: Install expect
