@@ -84,30 +84,22 @@ jobs:
       #     ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it
       #     echo "${{ secrets.SSH_PASSPHRASE }}"
 
-      - name: Setup SSH keys
-        run: |
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" | base64 -d > ~/.ssh/my_key
-          echo "${{ secrets.SSH_PUBLIC_KEY }}" | base64 -d > ~/.ssh/my_key.pub
-          echo "${{ secrets.SSH_CERT }}" | base64 -d > ~/.ssh/my_key-cert.pub
-
-          chmod 600 ~/.ssh/my_key
-          chmod 644 ~/.ssh/my_key.pub ~/.ssh/my_key-cert.pub
-
-      - name: Install expect
-        run: sudo apt-get update && sudo apt-get install -y expect
-
-      - name: SSH connect with passphrase
+      - name: Setup SSH agent, add key with passphrase, and connect
         env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_PASSPHRASE: ${{ secrets.SSH_PASSPHRASE }}
         run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" | base64 -d > ~/.ssh/my_key
+          chmod 600 ~/.ssh/my_key
+
           eval "$(ssh-agent -s)"
+
           expect -c "
           spawn ssh-add ~/.ssh/my_key
           expect \"Enter passphrase for ~/.ssh/my_key:\"
           send \"$SSH_PASSPHRASE\r\"
           expect eof
           "
+
           ssh -o StrictHostKeyChecking=no msandret@login.g100.cineca.it
