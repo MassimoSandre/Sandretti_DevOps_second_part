@@ -7,89 +7,71 @@ on:
     branches: [ "master" ]
 
 jobs:
-  # build_and_test:
+  build_and_test:
 
-  #   runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #   - uses: actions/checkout@v4
-  #   - name: Configure
-  #     run: |
-  #         git submodule update --init --recursive
-  #         mkdir -p build
-  #         cd build
-  #         cmake ..
+    steps:
+    - uses: actions/checkout@v4
+    - name: Configure
+      run: |
+          git submodule update --init --recursive
+          mkdir -p build
+          cd build
+          cmake ..
 
-  #   - name: Build
-  #     run: |
-  #         cd build
-  #         make
+    - name: Build
+      run: |
+          cd build
+          make
 
-  #   - name: Run tests
-  #     run: |
-  #         cd build
-  #         ctest --output-on-failure
-  # build_container:
-  #   needs: build_and_test
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #       with:
-  #         submodules: recursive
-  #     - name: Install Singularity
-  #       run: |
-  #         export DEBIAN_FRONTEND=noninteractive
-  #         export TZ=Europe/Rome
-
-  #         echo "tzdata tzdata/Areas select Europe"         | sudo debconf-set-selections
-  #         echo "tzdata tzdata/Zones/Europe select Rome"   | sudo debconf-set-selections
-
-  #         sudo -E apt-get update
-  #         sudo -E apt-get install -y tzdata
-
-  #         sudo -E apt-get install -y singularity-container
-
-  #     - name: Build Singularity container image
-  #       run: |
-  #         sudo singularity build image_to_grayscale.sif singularity.def
-
-  #     - uses: actions/upload-artifact@v4
-  #       with:
-  #         name: singularity-image
-  #         path: image_to_grayscale.sif
-  
-  connect_to_cluster:
+    - name: Run tests
+      run: |
+          cd build
+          ctest --output-on-failure
+  build_container:
+    needs: build_and_test
     runs-on: ubuntu-latest
     steps:
-      # - name: Checkout repository
-      #   uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Install Singularity
+        run: |
+          export DEBIAN_FRONTEND=noninteractive
+          export TZ=Europe/Rome
 
-      # - name: SSH keys
-      #   run: |
-      #     mkdir -p ~/.ssh
-          
-      #     echo "${{ secrets.SSH_PRIVATE_KEY }}" | base64 -d > ~/.ssh/my_key
-      #     echo "${{ secrets.SSH_PUBLIC_KEY }}"  | base64 -d > ~/.ssh/my_key.pub
-      #     echo "${{ secrets.SSH_CERT }}"        | base64 -d > ~/.ssh/my_key.crt
+          echo "tzdata tzdata/Areas select Europe"         | sudo debconf-set-selections
+          echo "tzdata tzdata/Zones/Europe select Rome"   | sudo debconf-set-selections
 
-      #     chmod 600 ~/.ssh/my_key
-      #     chmod 644 ~/.ssh/my_key.pub ~/.ssh/my_key.crt
+          sudo -E apt-get update
+          sudo -E apt-get install -y tzdata
 
-      # - name: SSH agent
-      #   run: |
-      #     eval "$(ssh-agent -s)"
+          sudo -E apt-get install -y singularity-container
 
-      # - name: Connection
-      #   run: |
-      #     ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it
-      #     echo "${{ secrets.SSH_PASSPHRASE }}"
+      - name: Build Singularity container image
+        run: |
+          sudo singularity build image_to_grayscale.sif singularity.def
 
+      - uses: actions/upload-artifact@v4
+        with:
+          name: singularity-image
+          path: image_to_grayscale.sif
+  
+  send_to_cluster:
+    runs-on: ubuntu-latest
+    steps:
       - uses: actions/checkout@v3
+
+      - uses: actions/download-artifact@v3
+        with:
+          name: singularity-image
+          path: ./
 
       - name: Install expect
         run: sudo apt-get update && sudo apt-get install -y expect
 
-      - name: Setup SSH key and agent, then connect
+      - name: Send files and Sbatch job
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_PASSPHRASE: ${{ secrets.SSH_PASSPHRASE }}
@@ -112,7 +94,9 @@ jobs:
           expect eof
           EOF
 
-          ssh -o StrictHostKeyChecking=no msandret@login.g100.cineca.it
-          scp -i ~/.ssh/my_key -o StrictHostKeyChecking=no galileo100/job.sh msandret@login.g100.cineca.it:~/
-          ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "sbatch ~/job.sh"
+          ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "mkdir -p ~/jobs/img_to_grayscale_automatic"
+          scp -i ~/.ssh/my_key -o StrictHostKeyChecking=no galileo100/job.sh msandret@login.g100.cineca.it:~/jobs/img_to_grayscale_automatic/
+          scp -i ~/.ssh/my_key -o StrictHostKeyChecking=no -r galileo100/input_images msandret@login.g100.cineca.it:~/jobs/img_to_grayscale_automatic/
+          scp -i ~/.ssh/my_key -o StrictHostKeyChecking=no image_to_grayscale.sif msandret@login.g100.cineca.it:~/jobs/img_to_grayscale_automatic/
+          ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "sbatch ~/jobs/img_to_grayscale_automatic/job.sh"
           ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "squeue -u msandret"
