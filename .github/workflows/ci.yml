@@ -68,10 +68,18 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" | base64 -d > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | base64 -d > ~/.ssh/my_key
+          echo "${{ secrets.SSH_PUBLIC_KEY }}"  | base64 -d > ~/.ssh/my_key.pub
+          echo "${{ secrets.SSH_CERT }}"        | base64 -d > ~/.ssh/my_key.crt
+
+          chmod 600 ~/.ssh/my_key
+          chmod 644 ~/.ssh/my_key.pub ~/.ssh/my_key.crt
+
+      - name: SSH agent
+        run: |
+          eval "$(ssh-agent -s)"
 
       - name: Connection
         run: |
-          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no msandret@login.g100.cineca.it
+          ssh -i ~/.ssh/ msandret@login.g100.cineca.it
+          echo "${{ secrets.SSH_PASSPHRASE }}"
