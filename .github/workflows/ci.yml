@@ -7,53 +7,81 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build_and_test:
+  # build_and_test:
 
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #   - uses: actions/checkout@v4
+  #   - name: Configure
+  #     run: |
+  #         git submodule update --init --recursive
+  #         mkdir -p build
+  #         cd build
+  #         cmake ..
+
+  #   - name: Build
+  #     run: |
+  #         cd build
+  #         make
+
+  #   - name: Run tests
+  #     run: |
+  #         cd build
+  #         ctest --output-on-failure
+  # build_container:
+  #   needs: build_and_test
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #       with:
+  #         submodules: recursive
+  #     - name: Install Singularity
+  #       run: |
+  #         export DEBIAN_FRONTEND=noninteractive
+  #         export TZ=Europe/Rome
+
+  #         echo "tzdata tzdata/Areas select Europe"         | sudo debconf-set-selections
+  #         echo "tzdata tzdata/Zones/Europe select Rome"   | sudo debconf-set-selections
+
+  #         sudo -E apt-get update
+  #         sudo -E apt-get install -y tzdata
+
+  #         sudo -E apt-get install -y singularity-container
+
+  #     - name: Build Singularity container image
+  #       run: |
+  #         sudo singularity build image_to_grayscale.sif singularity.def
+
+  #     - uses: actions/upload-artifact@v4
+  #       with:
+  #         name: singularity-image
+  #         path: image_to_grayscale.sif
+  
+  connect_to_cluster:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Configure
-      run: |
-          git submodule update --init --recursive
-          mkdir -p build
-          cd build
-          cmake ..
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Build
-      run: |
-          cd build
-          make
-
-    - name: Run tests
-      run: |
-          cd build
-          ctest --output-on-failure
-  build_container:
-    needs: build_and_test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
-      - name: Install Singularity
+      - name: SSH keys
         run: |
-          export DEBIAN_FRONTEND=noninteractive
-          export TZ=Europe/Rome
+          mkdir -p ~/.ssh
+          
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" | base64 -d > ~/.ssh/my_key
+          echo "${{ secrets.SSH_PUBLIC_KEY }}"  | base64 -d > ~/.ssh/my_key.pub
+          echo "${{ secrets.SSH_CERT }}"        | base64 -d > ~/.ssh/my_key.crt
 
-          echo "tzdata tzdata/Areas select Europe"         | sudo debconf-set-selections
-          echo "tzdata tzdata/Zones/Europe select Rome"   | sudo debconf-set-selections
+          chmod 600 ~/.ssh/my_key
+          chmod 644 ~/.ssh/my_key.pub ~/.ssh/my_key.crt
 
-          sudo -E apt-get update
-          sudo -E apt-get install -y tzdata
-
-          sudo -E apt-get install -y singularity-container
-
-      - name: Build Singularity container image
+      - name: SSH agent
         run: |
-          sudo singularity build image_to_grayscale.sif singularity.def
+          eval "$(ssh-agent -s)"
+          echo "${{ secrets.SSH_PASSPHRASE }}" | SSH_ASKPASS=$(mktemp) DISPLAY=:0 ssh-add ~/.ssh/my_key
+        env:
+          SSH_ASKPASS: /usr/bin/ssh-askpass
 
-      - uses: actions/upload-artifact@v4
-        with:
-          name: singularity-image
-          path: image_to_grayscale.sif
+      - name: Connection
+        run: |
+          ssh msandret@login.g100.cineca.it
