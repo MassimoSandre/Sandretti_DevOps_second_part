@@ -81,5 +81,5 @@ jobs:
 
       - name: Connection
         run: |
-          ssh -i ~/.ssh/ msandret@login.g100.cineca.it
+          ssh -i ~/.ssh/ -o StrictHostKeyChecking=no msandret@login.g100.cineca.it
           echo "${{ secrets.SSH_PASSPHRASE }}"
