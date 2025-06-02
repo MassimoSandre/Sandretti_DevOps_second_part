@@ -95,9 +95,26 @@ jobs:
           expect eof
           EOF
 
-          ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "mkdir -p ~/jobs/img_to_grayscale_automatic"
+          ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "
+            rm -rf ~/jobs/img_to_grayscale_automatic && \
+            mkdir -p ~/jobs/img_to_grayscale_automatic
+          "
           scp -i ~/.ssh/my_key -o StrictHostKeyChecking=no galileo100/job.sh msandret@login.g100.cineca.it:~/jobs/img_to_grayscale_automatic/
           scp -i ~/.ssh/my_key -o StrictHostKeyChecking=no -r galileo100/input_images msandret@login.g100.cineca.it:~/jobs/img_to_grayscale_automatic/
           scp -i ~/.ssh/my_key -o StrictHostKeyChecking=no image_to_grayscale.sif msandret@login.g100.cineca.it:~/jobs/img_to_grayscale_automatic/
           ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "cd ~/jobs/img_to_grayscale_automatic && sbatch job.sh"
-          ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "squeue -u msandret"
+          
+          jobid=$(ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no $REMOTE "cd ~/$REMOTE_DIR && sbatch job.sh" | awk '{print $4}')
+          echo "Job ID: $jobid"
+
+          while ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no $REMOTE "squeue -j $jobid" | grep -q $jobid; do
+            echo "Job $jobid is still running..."
+            sleep 10
+          done
+
+          echo "Job $jobid completed."
+
+          echo "Job output:"
+          ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no $REMOTE "cat ~/$REMOTE_DIR/job_${jobid}.out"
+          echo "Job error:"
+          ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no $REMOTE "cat ~/$REMOTE_DIR/job_${jobid}.err"
