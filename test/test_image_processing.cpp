@@ -158,11 +158,10 @@ TEST(GrayscaleTest, BlueChannel) {
 //     // Luminosity method uses the formula: 0.21*R + 0.72*G + 0.07*B
 //     // The expected values are calculated as follows:
 //     std::vector<std::vector<int>> expected = {
-//         {2 /* (0.21*1 + 0.72*2 + 0.07*3) */, 170 /* (0.21*255 + 0.72*255 + 0.07*0) */},
-//         {66 /* (0.21*92 + 0.72*8 + 0.07*4) */, 255 /* (0.21*255 + 0.72*255 + 0.07*255) */},
-//         {62 /* (0.21*0 + 0.72*125 + 0.07*90) */, 48 /* (0.21*12 + 0.72*25 + 0.07*85) */}
-//     };
-    
+//         {1 /* (0.21*1 + 0.72*2 + 0.07*3) */, 235 /* (0.21*255 + 0.72*255 + 0.07*0) */},
+//         {25 /* (0.21*92 + 0.72*8 + 0.07*4) */, 254 /* (0.21*255 + 0.72*255 + 0.07*255) */},
+//         {96 /* (0.21*0 + 0.72*125 + 0.07*90) */, 26 /* (0.21*12 + 0.72*25 + 0.07*85) */}
+//     };std::vector<std::vector<int>> expected = {    
 //     for (int row = 0; row < image.size(); row++) {
 //         for (int col = 0; col < image[0].size(); col++) {
 //             EXPECT_EQ(result[row][col], expected[row][col]) << " at (" << row << ", " << col << ")";
@@ -354,10 +353,10 @@ TEST(GrayscaleTest, MultiplePixelsAndMethods) {
     EXPECT_EQ(result[1][1], 170); // Yellow pixel (average of 255, 255, 0) => (255+255+0)/3 = 170
 
     // convertToGrayscale(image, 2, 2, GrayscaleMethod::Luminosity, result);
-    // EXPECT_EQ(result[0][0], 54);  // Red pixel (0.21*255 + 0.72*0 + 0.07*0) => 54
+    // EXPECT_EQ(result[0][0], 53);  // Red pixel (0.21*255 + 0.72*0 + 0.07*0) => 53
     // EXPECT_EQ(result[0][1], 183); // Green pixel (0.21*0 + 0.72*255 + 0.07*0) => 183
-    // EXPECT_EQ(result[1][0], 18);  // Blue pixel (0.21*0 + 0.72*0 + 0.07*255) => 18
-    // EXPECT_EQ(result[1][1], 255); // Yellow pixel (0.21*255 + 0.72*255 + 0.07*0) => 255
+    // EXPECT_EQ(result[1][0], 17);  // Blue pixel (0.21*0 + 0.72*0 + 0.07*255) => 17
+    // EXPECT_EQ(result[1][1], 237); // Yellow pixel (0.21*255 + 0.72*255 + 0.07*0) => 237
 
     convertToGrayscale(image, 2, 2, GrayscaleMethod::RootMeanSquare, result);
     EXPECT_EQ(result[0][0], 147); // Red pixel (sqrt((255^2 + 0^2 + 0^2)/3)) => 147
