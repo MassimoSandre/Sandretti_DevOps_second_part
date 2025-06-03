@@ -38,19 +38,12 @@ jobs:
           submodules: recursive
       - name: Install Singularity
         run: |
-          export DEBIAN_FRONTEND=noninteractive
-          export TZ=Europe/Rome
-
-          echo "tzdata tzdata/Areas select Europe"         | sudo debconf-set-selections
-          echo "tzdata tzdata/Zones/Europe select Rome"   | sudo debconf-set-selections
-
           sudo -E apt-get update
-          sudo -E apt-get install -y tzdata
-
           sudo -E apt-get install -y singularity-container
 
       - name: Build Singularity container image
         run: |
+          # build the Singularity image from the definition file
           sudo singularity build image_to_grayscale.sif singularity.def
 
       - uses: actions/upload-artifact@v4
@@ -74,20 +67,23 @@ jobs:
 
       - name: Send files and Sbatch job
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_PASSPHRASE: ${{ secrets.SSH_PASSPHRASE }}
+          CINECA_USERNAME: ${{ secrets.CINECA_USERNAME }}
         run: |
           mkdir -p ~/.ssh
           
+          # Decode SSH keys from base64 and save them as files in the .ssh directory
           echo "${{ secrets.SSH_PRIVATE_KEY }}" | base64 -d > ~/.ssh/my_key
           echo "${{ secrets.SSH_PUBLIC_KEY }}"  | base64 -d > ~/.ssh/my_key.pub
           echo "${{ secrets.SSH_CERT }}"        | base64 -d > ~/.ssh/my_key-cert.pub
 
+          # Set permissions for the SSH keys
           chmod 600 ~/.ssh/my_key
           chmod 644 ~/.ssh/my_key.pub ~/.ssh/my_key-cert.pub
 
           eval "$(ssh-agent -s)"
 
+          # Add the private key to the SSH agent (expecting a passphrase)
           expect <<EOF
           spawn ssh-add "$HOME/.ssh/my_key"
           expect "Enter passphrase for $HOME/.ssh/my_key:"
@@ -95,23 +91,28 @@ jobs:
           expect eof
           EOF
 
-          ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "
+          # deleting the old files on the cluster and creating the job directory
+          ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no $CINECA_USERNAME@login.g100.cineca.it "
             rm -rf ~/jobs/img_to_grayscale_automatic && \
             mkdir -p ~/jobs/img_to_grayscale_automatic
           "
           ssh-keygen -f '/home/runner/.ssh/known_hosts' -R 'login.g100.cineca.it'
-          scp -i ~/.ssh/my_key -o StrictHostKeyChecking=no galileo100/job.sh msandret@login.g100.cineca.it:~/jobs/img_to_grayscale_automatic/
+
+          # Copying the job script, input images, and Singularity image to the cluster
+          scp -i ~/.ssh/my_key -o StrictHostKeyChecking=no galileo100/job.sh $CINECA_USERNAME@login.g100.cineca.it:~/jobs/img_to_grayscale_automatic/
           ssh-keygen -f '/home/runner/.ssh/known_hosts' -R 'login.g100.cineca.it'
-          scp -i ~/.ssh/my_key -o StrictHostKeyChecking=no -r galileo100/input_images msandret@login.g100.cineca.it:~/jobs/img_to_grayscale_automatic/
+          scp -i ~/.ssh/my_key -o StrictHostKeyChecking=no -r galileo100/input_images $CINECA_USERNAME@login.g100.cineca.it:~/jobs/img_to_grayscale_automatic/
           ssh-keygen -f '/home/runner/.ssh/known_hosts' -R 'login.g100.cineca.it'
-          scp -i ~/.ssh/my_key -o StrictHostKeyChecking=no image_to_grayscale.sif msandret@login.g100.cineca.it:~/jobs/img_to_grayscale_automatic/
-          
+          scp -i ~/.ssh/my_key -o StrictHostKeyChecking=no image_to_grayscale.sif $CINECA_USERNAME@login.g100.cineca.it:~/jobs/img_to_grayscale_automatic/
           ssh-keygen -f '/home/runner/.ssh/known_hosts' -R 'login.g100.cineca.it'
-          jobid=$(ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "cd ~/jobs/img_to_grayscale_automatic/ && sbatch job.sh" | awk '{print $4}')
+
+          # Submitting the job to the cluster
+          jobid=$(ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no $CINECA_USERNAME@login.g100.cineca.it "cd ~/jobs/img_to_grayscale_automatic/ && sbatch job.sh" | awk '{print $4}')
           echo "Job ID: $jobid"
 
+          # Wait for the job to complete
           ssh-keygen -f '/home/runner/.ssh/known_hosts' -R 'login.g100.cineca.it'
-          while ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "squeue -j $jobid" | grep -q $jobid; do
+          while ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no $CINECA_USERNAME@login.g100.cineca.it "squeue -j $jobid" | grep -q $jobid; do
             echo "Job $jobid is still running..."
             sleep 5
             ssh-keygen -f '/home/runner/.ssh/known_hosts' -R 'login.g100.cineca.it'
@@ -119,14 +120,16 @@ jobs:
 
           echo "Job $jobid completed."
 
+          # Fetching the job output and error files, and the output images
           echo "Job output:"
           ssh-keygen -f '/home/runner/.ssh/known_hosts' -R 'login.g100.cineca.it'
-          ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "cat ~/jobs/img_to_grayscale_automatic/job_${jobid}.out"
+          ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no $CINECA_USERNAME@login.g100.cineca.it "cat ~/jobs/img_to_grayscale_automatic/job_${jobid}.out"
           echo "Job error:"
           ssh-keygen -f '/home/runner/.ssh/known_hosts' -R 'login.g100.cineca.it'
-          ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no msandret@login.g100.cineca.it "cat ~/jobs/img_to_grayscale_automatic/job_${jobid}.err"
+          ssh -i ~/.ssh/my_key -o StrictHostKeyChecking=no $CINECA_USERNAME@login.g100.cineca.it "cat ~/jobs/img_to_grayscale_automatic/job_${jobid}.err"
 
-          scp -i ~/.ssh/my_key -o StrictHostKeyChecking=no -r msandret@login.g100.cineca.it:~/jobs/img_to_grayscale_automatic/output_images ./output_images
+          ssh-keygen -f '/home/runner/.ssh/known_hosts' -R 'login.g100.cineca.it'
+          scp -i ~/.ssh/my_key -o StrictHostKeyChecking=no -r $CINECA_USERNAME@login.g100.cineca.it:~/jobs/img_to_grayscale_automatic/output_images ./output_images
 
       - uses: actions/upload-artifact@v4
         with:
