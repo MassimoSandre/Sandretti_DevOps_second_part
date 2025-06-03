@@ -165,8 +165,8 @@ As requested I used Github Actions to automate building, testing, containerizing
 ## Problems & Solutions
 ### Connection to the Galileo Cluster
 the main problem encountered was connecting to the Galileo cluster bypassing the two factor authentication.
-The solution was found reading through the Cineca User Guide, which explained how to create a certificate and key to use as credentials. Those credential have a validity of 12 hours. The steps I followed are awailable [here](https://docs.hpc.cineca.it/general/access.html).
-In order to use these credentials in github action, I created ifve secrets:
+The solution was found reading through the Cineca User Guide, which explained how to create a certificate and key to use as credentials. Those credential have a validity of 12 hours. The steps I followed are available [here](https://docs.hpc.cineca.it/general/access.html).
+In order to use these credentials in github action, I created five secrets:
 - `SSH_CERT`: the certificate in base64 format
 - `SSH_PRIVATE_KEY`: the private key in base64 format
 - `SSH_PUBLIC_KEY`: the public key in base64 format   
